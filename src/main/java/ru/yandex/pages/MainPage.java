@@ -31,7 +31,7 @@ public class MainPage {
     public static final String ANSWER_6_TEXT = "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои.";
     public static final String ANSWER_7_TEXT = "Да, обязательно. Всем самокатов! И Москве, и Московской области.";
     public static final By ORDER_BUTTON_HEADER = By.xpath(".//button[@class='Button_Button__ra12g' and text()='Заказать']");
-   
+
     private final WebDriver driver;
 
     public MainPage(WebDriver driver) {
