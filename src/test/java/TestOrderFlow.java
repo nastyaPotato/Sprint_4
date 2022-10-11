@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +13,7 @@ import ru.yandex.pages.OrderPage;
 import ru.yandex.pages.SecondOrderPage;
 
 import static org.junit.Assert.assertTrue;
-import static ru.yandex.pages.MainPage.ORDER_BUTTON_HEADER;
+import static ru.yandex.pages.MainPage.*;
 import static ru.yandex.pages.OrderPage.*;
 import static ru.yandex.pages.SecondOrderPage.*;
 
@@ -28,9 +29,11 @@ public class TestOrderFlow {
     private final String day;
     private final String comment;
     private final String result;
+    private final By orderButton;
     private WebDriver driver;
 
-    public TestOrderFlow(String name, String lastName, String address, String metro, String phoneNumber, String date, String colour, String day, String comment, String result) {
+    public TestOrderFlow(By orderButton, String name, String lastName, String address, String metro, String phoneNumber, String date, String colour, String day, String comment, String result) {
+        this.orderButton = orderButton;
         this.name = name;
         this.lastName = lastName;
         this.address = address;
@@ -46,8 +49,8 @@ public class TestOrderFlow {
     @Parameterized.Parameters
     public static Object[][] getInputs() {
         return new Object[][]{
-                {"Анастасия", "Яковенко", " ул. Минина", "Маяковская", "89101087765", "10.10.2022", "black", "one", "", "Заказ оформлен"},
-                {"Илья", "Михайлов", " ул. Ижорская", "Черкизовская", "89101089965", "11.10.2022", "grey", "two", "Тест", "Заказ оформлен"},
+                {ORDER_BUTTON_BOTTOM, "Анастасия", "Яковенко", " ул. Минина", "Маяковская", "89101087765", "10.10.2022", "black", "one", "", "Заказ оформлен"},
+                {ORDER_BUTTON_HEADER, "Илья", "Михайлов", " ул. Ижорская", "Черкизовская", "89101089965", "11.10.2022", "grey", "two", "Тест", "Заказ оформлен"},
         };
 
     }
@@ -62,7 +65,8 @@ public class TestOrderFlow {
     @Test
     public void fillOrderForm() {
         MainPage mainPage = new MainPage(driver);
-        mainPage.clickOnQuestion(ORDER_BUTTON_HEADER);
+
+        mainPage.clickOnOrderButton(orderButton);
 
         OrderPage orderPage = new OrderPage(driver);
         orderPage.clickOnElement(INPUT_NAME);

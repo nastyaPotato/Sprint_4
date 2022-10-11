@@ -51,7 +51,7 @@ public class TestQuestionsOnMainPage {
     public void checkListOfQuestions() {
         MainPage mainPage = new MainPage(driver);
         mainPage.scrollTillQuestions();
-        mainPage.clickOnQuestion(question);
+        mainPage.clickOnElement(question);
         assertEquals(answerText, driver.findElement(answer).getText());
     }
 
